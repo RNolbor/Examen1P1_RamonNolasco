@@ -15,9 +15,15 @@ public class Examen1P1_RamonNolasco {
     /**
      * @param args the command line arguments
      */
-    public int[] crearCombinacion(int longitud){
-        int[] arreglo = new int[longitud];
+    public static char[] crearCombinacion(int longitud){
+        Random random = new Random();
+        char[] arreglo = new char[longitud];
         arreglo[1] = 10;
+        for (int i = longitud ; i > 0 ; i -= 1){
+            int e = 0;
+            arreglo[e] = (char) ((char)random.nextInt(25) + 97);
+            e += 1;
+        }
         return arreglo;
     }
     
@@ -36,8 +42,8 @@ public class Examen1P1_RamonNolasco {
             dificultad = scanner.nextInt();
         }
         
-        int longitud;
-        int intentos;
+        int longitud = 0;
+        int intentos = 0;
         switch (dificultad){           
             case 1:
                 longitud = 6;
@@ -53,7 +59,40 @@ public class Examen1P1_RamonNolasco {
                 break;                
         }
         
-        char c = (char)76;
+        char[] arregloProgreso = new char[longitud];
+        for (int i = 0; i < longitud; i++) {
+            arregloProgreso[i] = '-';
+        }
+
+        char[] combinacion = crearCombinacion(longitud);
+        int nIntento = 1;
+        boolean cadenaDescifrada = false;
+        
+        while (nIntento <= intentos || cadenaDescifrada == true){           
+            System.out.println("Intento " + nIntento + "/" + intentos);
+            System.out.println("Su progreso: " + Arrays.toString(arregloProgreso));
+            System.out.println("Ingrese un caracter: ");
+            char letra = scanner.next().charAt(0);
+            
+            for ( int y = longitud ; y > 0 ; y -= 1){
+                int l = 0;
+                for (int z = longitud ; z > 0 ; z -= 1){
+                    if (combinacion[l] == letra){
+                        arregloProgreso[l] = letra;
+                    }
+                    l += 1;
+                }
+                    
+            }
+            
+            nIntento += 1;
+        }
+        if (cadenaDescifrada == true){
+            System.out.println("Has descifrado la cadena: " + Arrays.toString(combinacion));
+        }
+        else{
+            System.out.println("No lograste descifrar la cadena, la cadena era: " + Arrays.toString(combinacion));
+        }
         
     }
     
