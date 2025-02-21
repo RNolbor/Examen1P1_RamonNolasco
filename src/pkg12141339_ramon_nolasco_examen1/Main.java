@@ -65,10 +65,7 @@ public class Main {
                     break;
                     
                 case 2: 
-                    
-                    
-                    
-                    
+                    plantasVSzombies();
                     
                     
                     break;
@@ -131,6 +128,102 @@ public class Main {
     
     //METODOS EJERCICIO 2 - PLANTAS VS ZOMBIES
     
-    
+    public static void plantasVSzombies(){
+        Scanner input = new Scanner(System.in);
+        
+        char[] A = new char[20];
+        char[] B = new char[20];
+        char[] C = new char[20];
+
+        A[19] = 'Z';
+        B[19] = 'Z';
+        C[19] = 'Z';
+        
+        int[] vidas = {100,100,100};                    
+        int[] posiciones = {19,19,19};
+                
+        int soles = 50; //AQUI EMPIEZA EN 50 COMO PRUEBA, PORQUE SINO SE QUEDA EN BUCLE XD 
+        
+        
+        boolean juego = true;
+        
+        while(juego){
+            
+            System.out.println("Soles = " + soles);
+            int opcion;
+            if (soles < 50){
+                System.out.println("Cediendo el turno...");
+                opcion = 2;
+            }else{
+                System.out.println("Opciones de jugador");
+                System.out.println("1 - Agregar Planta");
+                System.out.println("2 - Ceder turno");
+                System.out.println("Ingrese una opcion: ");
+                opcion = input.nextInt();
+            }
+            input.nextLine();
+            
+            switch (opcion){
+                
+                case 1:
+                    soles -= 50;
+                    System.out.println("Ingrese la posicion de la planta: ");
+                    String pos = input.nextLine();
+                    
+                    int fila = Character.getNumericValue(pos.charAt(0));
+                    int columna = Character.getNumericValue(pos.charAt(2));
+                    
+                    switch (fila){
+                        case 1:
+                            A[columna] = 'P';
+                            break;
+                        case 2:
+                            B[columna] = 'P';
+                            break;
+                        case 3:
+                            C[columna] = 'P';
+                            break;
+                    }
+                    imprimirJardin(A,B,C);
+                    
+                    break;
+                    
+                case 2: 
+                    imprimirJardin(A,B,C);
+                    soles += 25;
+                    continue;
+                    
+                    
+                default:
+                    System.out.println("Ingrese opcion valida!");
+                    soles -= 25;
+                    break;
+                    
+            }
+            soles += 25;
+                  
+        }
+              
+    }
+    public static void imprimirJardin(char[]A, char[]B, char[]C){
+        System.out.println("");
+        System.out.print("A: ");
+        for (int i = 0; i < A.length ; i++){
+            System.out.print("[" + A[i] + "]"); 
+        }
+        System.out.println("");
+        System.out.print("B: ");
+        for (int i = 0; i < B.length ; i++){
+            System.out.print("[" + A[i] + "]"); 
+        }
+        System.out.println("");
+        System.out.print("C: ");
+        for (int i = 0; i < C.length ; i++){
+            System.out.print("[" + C[i] + "]"); 
+        }
+        System.out.println("");
+        System.out.println("");
+    }
+  
 }
 
